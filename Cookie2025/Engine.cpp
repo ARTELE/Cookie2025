@@ -6,4 +6,6 @@ using namespace cookie;
 void Engine::Initialize()
 {
 	core::ThreadUtils::FetchMainThreadId();
+
+
 }

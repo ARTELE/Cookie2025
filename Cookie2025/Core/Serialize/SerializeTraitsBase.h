@@ -11,7 +11,7 @@ namespace cookie
 		class SerializeTraitsBase
 		{
 		public:
-			static size_t GetSize() const { return sizeof(T); }
+			static size_t GetSize() { return sizeof(T); }
 		};
 
 		template<typename T>
