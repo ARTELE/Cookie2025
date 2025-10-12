@@ -45,7 +45,6 @@ namespace cookie
 				(*currentNode)[name] = data;
 			}
 
-
 			template<>
 			void Serialize(uint16_t& data, const std::string& name)
 			{

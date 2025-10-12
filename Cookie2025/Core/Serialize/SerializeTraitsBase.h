@@ -5,9 +5,6 @@ namespace cookie
 	namespace core
 	{
 		template<typename T>
-		concept BuiltInType = std::integral<T> && std::floating_point<T>;
-
-		template<typename T>
 		class SerializeTraitsBase
 		{
 		public:
