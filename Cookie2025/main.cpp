@@ -1,22 +1,18 @@
 #include <iostream>
+#include <fstream>
 #include "Engine.h"
 #include <Core/Serialize/YAMLWrite.h>
+#include <cereal/archives/json.hpp>
 
 struct Test
 {
 	uint16_t a;
 	uint32_t b;
 
-	static const char* GetTypeString()
-	{
-		return "Test";
-	}
-
 	template<typename T>
-	void Serialize(T& serializer)
+	void serialize(T& ar)
 	{
-		SERIALIZE(a);
-		SERIALIZE(b);
+		ar(cereal::make_nvp("a", a), cereal::make_nvp("b", b));
 	}
 };
 
@@ -25,10 +21,19 @@ int main()
 	cookie::Engine engine;
 	engine.Initialize();
 
-	cookie::core::YAMLWrite write;
-
-	Test test;
-	write.SerializeRoot(test);
+	Test test{ 42, 1337 };
+	{
+		std::ofstream os("test.json");
+		cereal::JSONOutputArchive archive(os);
+		archive(cereal::make_nvp("Test", test));
+	}
+	{
+		std::ifstream is("test.json");
+		cereal::JSONInputArchive archive(is);
+		Test loadedTest;
+		archive(loadedTest);
+		std::cout << "Loaded Test: a=" << loadedTest.a << ", b=" << loadedTest.b << std::endl;
+	}
 
 	return 0;
 }

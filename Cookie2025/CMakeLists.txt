@@ -17,6 +17,8 @@ set(MI_BUILD_STATIC ON CACHE BOOL "" FORCE)
 set(MI_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 add_subdirectory(ThirdPartLib/mimalloc)
 
+include_directories(ThirdPartLib/cereal/include)
+
 # 将源代码添加到此项目的可执行文件。
 add_executable (Cookie2025 "main.cpp" "Engine.h" "Engine.cpp" ${CORE_SOURCE})
 
