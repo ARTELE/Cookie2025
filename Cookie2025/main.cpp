@@ -1,8 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Engine.h"
-#include <Core/Serialize/YAMLWrite.h>
-#include <cereal/archives/json.hpp>
+#include <Core/Serialize/Cereal.h>
 
 struct Test
 {
@@ -12,7 +11,7 @@ struct Test
 	template<typename T>
 	void serialize(T& ar)
 	{
-		ar(cereal::make_nvp("a", a), cereal::make_nvp("b", b));
+		ar(CEREAL_NVP(a), CEREAL_NVP(b));
 	}
 };
 
