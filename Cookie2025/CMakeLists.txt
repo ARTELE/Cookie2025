@@ -6,6 +6,10 @@ include_directories(ThirdPartLib/glm)
 
 file(GLOB_RECURSE CORE_SOURCE Core/*.h Core/*.cpp)
 
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(SDL_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(ThirdPartLib/sdl3)
+
 set(MI_BUILD_SHARED OFF CACHE BOOL "" FORCE)
 set(MI_BUILD_STATIC ON CACHE BOOL "" FORCE)
 set(MI_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -13,10 +17,14 @@ add_subdirectory(ThirdPartLib/mimalloc)
 
 include_directories(ThirdPartLib/cereal/include)
 
-# 将源代码添加到此项目的可执行文件。
-add_executable (Cookie2025 "main.cpp" "Engine.h" "Engine.cpp" ${CORE_SOURCE})
+include_directories(ThirdPartLib/imgui-docking)
+include_directories(ThirdPartLib/imgui-docking/backends)
+file(GLOB_RECURSE IMGUI_SOURCE ThirdPartLib/imgui-docking/*.h ThirdPartLib/imgui-docking/*.cpp)
 
-target_link_libraries(Cookie2025 mimalloc-static)
+# 将源代码添加到此项目的可执行文件。
+add_executable (Cookie2025 "main.cpp" "Engine.h" "Engine.cpp" ${CORE_SOURCE} ${IMGUI_SOURCE})
+
+target_link_libraries(Cookie2025 mimalloc-static d3d12 d3d11 dxguid dxgi SDL3-static)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Cookie2025 PROPERTY CXX_STANDARD 20)
