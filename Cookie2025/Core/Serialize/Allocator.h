@@ -3,7 +3,7 @@
 #include <mimalloc.h>
 #include <mimalloc-new-delete.h>
 
-namespace Cookie
+namespace cookie
 {
 	namespace core
 	{

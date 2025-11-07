@@ -4,10 +4,9 @@ namespace cookie
 {
 	namespace core
 	{
-		class CookieGlobals
+		class FrameContext
 		{
 		public:
-			static void Initialize();
 		};
 	}
 }

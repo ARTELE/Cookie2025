@@ -1,5 +1,4 @@
 #include "ThreadUtils.h"
-#include "CookieGlobals.h"
 
 using namespace cookie::core;
 
