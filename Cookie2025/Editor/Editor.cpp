@@ -46,6 +46,9 @@ void Editor::Initialize()
     init_info.PresentMode = SDL_GPU_PRESENTMODE_VSYNC;
     ImGui_ImplSDLGPU3_Init(&init_info);
 
+
+	fileExplorerWindow.SetTittle("File Explorer");
+	fileExplorerWindow.BuildFileTree("D:/FBX SDK");
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
     // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
@@ -105,6 +108,8 @@ void Editor::Update(core::FrameContext context)
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
+
+        fileExplorerWindow.Update();
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
